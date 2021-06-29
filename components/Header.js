@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 
-export default function Header(){
+export default function Header({title}){
+
     return (
         <View style={headerStyle.headerContainer}>
-            <Text style={headerStyle.headerText}>Yoki</Text>
+            <Text style={headerStyle.headerText}>{title}</Text>
         </View>
     )
 }

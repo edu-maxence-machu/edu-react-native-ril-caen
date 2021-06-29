@@ -1,14 +1,11 @@
 import React from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
-export default function ScanButtonView(){
+export default function ScanButtonView(props){
 
-    function handleScan (){
-        
-    }
     return (
         <View style={scanButtonStyle.buttonContainer}>
-        <TouchableOpacity style={scanButtonStyle.button} onPress={handleScan}>
+        <TouchableOpacity style={scanButtonStyle.button} onPress={props.onScanPress}>
           <Text style={scanButtonStyle.buttonText}>Scanner</Text>
         </TouchableOpacity>
       </View>
