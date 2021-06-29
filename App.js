@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Text, View, Image, Button, ScrollView } from 'react-native';
-
+import Header from './components/Header';
 export default function App() {
 
   const PRODUCTS = [
@@ -24,9 +24,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={headerStyle.headerContainer}>
-        <Text style={headerStyle.headerText}>Yoki</Text>
-      </View>
+
+      <Header/>
 
       <View style={scanButtonStyle.buttonContainer}>
         <TouchableOpacity style={scanButtonStyle.button} onPress={handleScan}>
@@ -34,9 +33,7 @@ export default function App() {
         </TouchableOpacity>
       </View>
 
-
       <ScrollView>
-
         {
           PRODUCTS.map((el) => {
             return (
@@ -47,7 +44,6 @@ export default function App() {
             )
           })
         }
-      
       </ScrollView>
 
       <StatusBar style="auto" />
@@ -90,19 +86,6 @@ const scanButtonStyle = StyleSheet.create({
   }
 });
 
-const headerStyle = StyleSheet.create({
-  headerContainer: {
-    paddingTop: 50,
-    paddingBottom: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomWidth: 1
-  },
-  headerText : {
-    fontSize: 24,
-    textTransform: 'uppercase'
-  }
-});
 
 const styles = StyleSheet.create({
   container: {
