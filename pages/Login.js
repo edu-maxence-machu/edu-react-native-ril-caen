@@ -1,10 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {View, Button, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, TextInput} from 'react-native'
 
 export default function Login(props){
 
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+
+
+    //alert('Render')
+
+    // Executé au chargement
+    useEffect(() => {
+        console.log('Je charge')
+    }, []); 
+
+    // Execution de la fonction quand email est modifié
+    useEffect(() => {
+        console.log(checkEmail(email));
+    }, [email]);
+
+    // Executé à chaque mise à jour 
+     useEffect(() => {
+        console.log('Je render')
+    }); 
+
+
 
     function checkPassword(str)
     {
