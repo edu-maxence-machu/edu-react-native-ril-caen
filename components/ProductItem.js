@@ -1,14 +1,13 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 export default function ProductItem(props){
 
-    console.log(props);
     return (
-        <View style={productStyle.container}>
+        <TouchableOpacity onPress={() => props.onItemClick(props.item)} style={productStyle.container}>
             <Text style={productStyle.productTitle}>{props.item.title}</Text>
             <Text style={productStyle.productDate}>Scanné hier à 18h</Text>
-        </View>
+        </TouchableOpacity>
     )
 }
 

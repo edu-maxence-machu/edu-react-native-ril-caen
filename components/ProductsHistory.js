@@ -9,7 +9,7 @@ export default function ProductsHistory(props){
         <ScrollView>
         {
           props.products.map((el) => {
-            return <ProductItem item={el}/>
+            return <ProductItem onItemClick={props.onItemClick} item={el}/>
           })
         }
       </ScrollView>

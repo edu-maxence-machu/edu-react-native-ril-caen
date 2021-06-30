@@ -8,6 +8,7 @@ import TestState from './pages/TestState';
 import Home from './pages/Home';
 import LoremPicsum from './pages/LoremPicsum';
 import Login from './pages/Login';
+import Product from './pages/Product';
 
 export default function App() {
 
@@ -20,6 +21,8 @@ export default function App() {
     { title: 'Belvita' },
     { title: 'Pizza Sodebo' },
   ]);
+
+  const [currentProduct, setCurrentProduct] = useState(null);
 
   const [page, navigate] = useState('Home');
 
@@ -37,14 +40,22 @@ export default function App() {
     navigate('Home')
   }
 
+  function handleItemClick(item){
+    setCurrentProduct(item);
+
+    navigate('Product')
+  }
+
   return (
     <View style={styles.container}>
       <Header title="Accueil"/>
 
-      { page === 'Home' && <Home products={products} handleScan={handleScan}/>}
+      { page === 'Home' && <Home onItemClick={handleItemClick} products={products} handleScan={handleScan}/>}
       { page === 'Test' && <TestState/> } 
       { page === 'LoremPicsum' && <LoremPicsum/> } 
       { page === 'Login' && <Login login={login}/> } 
+      { page === 'Product' && <Product product={currentProduct}/> } 
+
 
       <View style={styles.topMenu}>
           <Button 
