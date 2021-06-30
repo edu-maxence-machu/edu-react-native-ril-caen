@@ -20,18 +20,14 @@ export default function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
   const [page, navigate] = useState('Home');
 
-   useEffect(() => {
-    let newProducts = JSON.stringify(products);
-    AsyncStorage.setItem('@localproducts', newProducts);
-  }, [products]);
 
   useEffect( () => {
-    async function fetchStorage (){
-      let localproducts = await AsyncStorage.getItem('@localproducts');
-      console.log('async', localproducts);
+    async function fetchStorage(){
+      let localproducts = await AsyncStorage.getItem('@localproducts') ;
+      
       if(localproducts !== null){
         localproducts = JSON.parse(localproducts);
-        setProducts(localproducts)
+        setProducts(localproducts);
       }
     }
     
@@ -44,10 +40,9 @@ export default function App() {
     setProducts(oldArray => [...oldArray, product]);*/
   }
 
-
-
   async function afterCameraScan({type, data}){
       await getProductInfoFromApi(data);
+      await AsyncStorage.setItem('@localproducts', JSON.stringify(products));
   }
 
   function login(){
