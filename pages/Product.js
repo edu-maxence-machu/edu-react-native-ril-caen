@@ -7,7 +7,7 @@ export default function Product({product}){
     
     return (
         <View style={{flex: 1}}>
-            <Text style={{fontSize: 24}}>{product.title}</Text>
+            <Text style={{fontSize: 24}}>{product.generic_name}</Text>
         </View>
     )
 }

@@ -5,7 +5,7 @@ export default function ProductItem(props){
 
     return (
         <TouchableOpacity onPress={() => props.onItemClick(props.item)} style={productStyle.container}>
-            <Text style={productStyle.productTitle}>{props.item.title}</Text>
+            <Text style={productStyle.productTitle}>{props.item.generic_name}</Text>
             <Text style={productStyle.productDate}>Scanné hier à 18h</Text>
         </TouchableOpacity>
     )

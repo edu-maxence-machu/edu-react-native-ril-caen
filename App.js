@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, Text, View, Image, Button, ScrollView } from 'react-native';
 import Header from './components/Header';
 import ScanButtonView from './components/ScanButtonView';
@@ -10,45 +10,69 @@ import LoremPicsum from './pages/LoremPicsum';
 import Login from './pages/Login';
 import Product from './pages/Product';
 import Camera from './pages/Camera';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function App() {
 
-  const [products, setProducts] = useState([
-    { title: 'Bouteille d\'eau' },
-    { title: 'Canette Fanta' },
-    { title: 'Canette Pepsi' },
-    { title: 'Canette de Perrier' },
-    { title: 'Kinder Bueno' },
-    { title: 'Belvita' },
-    { title: 'Pizza Sodebo' },
-  ]);
+  const [products, setProducts] = useState([]);
 
   const [currentProduct, setCurrentProduct] = useState(null);
-
   const [page, navigate] = useState('Home');
 
+/*   useEffect(() => {
+    let newProducts = JSON.stringify(products);
+    AsyncStorage.setItem('localproducts', newProducts);
+  }, [products]);
 
-  function onPressLearnMore (){
-    alert('toto');
-  }
-
+  useEffect(async () => {
+    let localproducts = await AsyncStorage.getItem('localproducts');
+    console.log(localproducts);
+    if(localproducts !== null){
+      localproducts = JSON.parse(localproducts);
+      setProducts(localproducts)
+    }
+  }, []); */
+  
   function handleScanPress (){
     navigate('Camera');
     /*const product = {title: 'La démo !'};
     setProducts(oldArray => [...oldArray, product]);*/
   }
 
-  function afterCameraScan({type, data}){
-      alert(type + data);
+
+
+  async function afterCameraScan({type, data}){
+      await getProductInfoFromApi(data);
   }
 
   function login(){
     navigate('Home')
   }
 
+
+  async function getProductInfoFromApi (barCode) {
+    try {
+      //this.setState({loading : true});
+
+      let response = await fetch(
+        'https://fr.openfoodfacts.org/api/v0/produit/' + barCode + '.json'
+      );
+      let responseJson = await response.json();
+      responseJson = responseJson.product;
+
+      setProducts((prevState) => [...prevState, responseJson]);
+      setCurrentProduct(responseJson);
+      console.log(responseJson)
+      navigate('Product');
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   function handleItemClick(item){
     setCurrentProduct(item);
-
     navigate('Product')
   }
 
