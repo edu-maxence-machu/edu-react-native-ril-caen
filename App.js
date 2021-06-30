@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, TouchableOpacity, Text, View, Image, Button, ScrollView } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View, Image, ScrollView } from 'react-native';
 import Header from './components/Header';
 import ScanButtonView from './components/ScanButtonView';
 import ProductsHistory from './components/ProductsHistory';
@@ -11,14 +11,25 @@ import Login from './pages/Login';
 import Product from './pages/Product';
 import Camera from './pages/Camera';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
+import {Button, Icon} from 'react-native-elements'
+import { Ionicons } from '@expo/vector-icons';
 export default function App() {
 
   const [products, setProducts] = useState([]);
 
   const [currentProduct, setCurrentProduct] = useState(null);
   const [page, navigate] = useState('Home');
+
+
+  useEffect(() => {
+    async function setItemLocal(){
+      await AsyncStorage.setItem('@localproducts', JSON.stringify(products));
+    }
+
+    if(products.length !== 0){
+      setItemLocal();
+     };
+  }, [JSON.stringify(products)]); // Changes will be caught :) !
 
 
   useEffect( () => {
@@ -42,7 +53,6 @@ export default function App() {
 
   async function afterCameraScan({type, data}){
       await getProductInfoFromApi(data);
-      await AsyncStorage.setItem('@localproducts', JSON.stringify(products));
   }
 
   function login(){
@@ -88,29 +98,33 @@ export default function App() {
 
 
       <View style={styles.topMenu}>
-          <Button 
-            title="Home" 
-            color={page === "Home" ? "green" : 'grey'}
-            onPress={() => navigate('Home')}
-          />
+        <Button
+          type="clear"
+          icon={
+            <Ionicons name="home-outline" size={32} color={page === "Home" ? "green" : 'grey'} />
+          }
+          onPress={() => navigate('Home')}
+        />
           
-          <Button 
-            title="Test" 
-            color={page === "Test" ? "green" : 'grey'}
-            onPress={() => navigate('Test')}
-          />
+        <Button
+        type="clear"
+        color={page === "Test" ? "green" : 'grey'}
+        icon={
+          <Ionicons name="airplane-outline" size={32} color={page === "Test" ? "green" : 'grey'} />
+        }
+        onPress={() => navigate('Test')}
+        />
+        
           
-          <Button 
-            title="Picsum" 
-            color={page === "LoremPicsum" ? "green" : 'grey'}
-            onPress={() => navigate('LoremPicsum')}
-          />
-          
-          <Button 
-            title="Login" 
-            color={page === "Login" ? "green" : 'grey'}
-            onPress={() => navigate('Login')}
-          />
+        <Button
+        type="clear"
+        color={page === "Login" ? "green" : 'grey'}
+        icon={
+          <Ionicons name="log-in-outline" size={32} color={page === "Login" ? "green" : 'grey'} />
+        }
+        onPress={() => navigate('Login')}
+        />
+        
         </View>
 
       <StatusBar style="auto" />

@@ -1,13 +1,24 @@
 import React from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
-
+import {Button} from 'react-native-elements';
+import { Ionicons } from '@expo/vector-icons';
+ 
 export default function ScanButtonView(props){
 
     return (
         <View style={scanButtonStyle.buttonContainer}>
-        <TouchableOpacity style={scanButtonStyle.button} onPress={props.onScanPress}>
-          <Text style={scanButtonStyle.buttonText}>Scanner</Text>
-        </TouchableOpacity>
+
+          <Button
+            icon={
+              <Ionicons
+                name="scan-circle-outline"
+                size={40}
+                color="white"
+              />
+            }
+            title="Scanner"
+            onPress={props.onScanPress}
+          />
       </View>
     )
 }

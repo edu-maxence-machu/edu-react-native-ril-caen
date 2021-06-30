@@ -1,12 +1,17 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
+import {Header} from 'react-native-elements'
 
-export default function Header({title}){
+export default function CustomHeader({title}){
 
     return (
-        <View style={headerStyle.headerContainer}>
-            <Text style={headerStyle.headerText}>{title}</Text>
-        </View>
+      <Header
+      containerStyle={{
+        backgroundColor: '#3D6DCC',
+        justifyContent: 'space-around',
+      }}
+        centerComponent={{ text: title, style: { color: '#fff' } }}
+      />
     )
 }
 
