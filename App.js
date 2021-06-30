@@ -20,19 +20,23 @@ export default function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
   const [page, navigate] = useState('Home');
 
-/*   useEffect(() => {
+   useEffect(() => {
     let newProducts = JSON.stringify(products);
-    AsyncStorage.setItem('localproducts', newProducts);
+    AsyncStorage.setItem('@localproducts', newProducts);
   }, [products]);
 
-  useEffect(async () => {
-    let localproducts = await AsyncStorage.getItem('localproducts');
-    console.log(localproducts);
-    if(localproducts !== null){
-      localproducts = JSON.parse(localproducts);
-      setProducts(localproducts)
+  useEffect( () => {
+    async function fetchStorage (){
+      let localproducts = await AsyncStorage.getItem('@localproducts');
+      console.log('async', localproducts);
+      if(localproducts !== null){
+        localproducts = JSON.parse(localproducts);
+        setProducts(localproducts)
+      }
     }
-  }, []); */
+    
+    fetchStorage();
+  }, []); 
   
   function handleScanPress (){
     navigate('Camera');
