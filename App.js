@@ -32,10 +32,14 @@ export default function App() {
     alert('toto');
   }
 
-  function handleScan (){
-    navigate('Camera')
+  function handleScanPress (){
+    navigate('Camera');
     /*const product = {title: 'La démo !'};
     setProducts(oldArray => [...oldArray, product]);*/
+  }
+
+  function afterCameraScan({type, data}){
+      alert(type + data);
   }
 
   function login(){
@@ -52,12 +56,12 @@ export default function App() {
     <View style={styles.container}>
       <Header title="Accueil"/>
 
-      { page === 'Home' && <Home onItemClick={handleItemClick} products={products} handleScan={handleScan}/>}
+      { page === 'Home' && <Home onItemClick={handleItemClick} products={products} handleScan={handleScanPress}/>}
       { page === 'Test' && <TestState/> } 
       { page === 'LoremPicsum' && <LoremPicsum/> } 
       { page === 'Login' && <Login login={login}/> } 
       { page === 'Product' && <Product product={currentProduct}/> } 
-      { page === 'Camera' && <Camera /> } 
+      { page === 'Camera' && <Camera handleCameraScan={afterCameraScan} /> } 
 
 
       <View style={styles.topMenu}>
