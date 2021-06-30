@@ -1,5 +1,5 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 export default function Camera(){
@@ -35,3 +35,5 @@ export default function Camera(){
       </View>
     );
 }
+
+const styles = StyleSheet.create({})

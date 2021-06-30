@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import LoremPicsum from './pages/LoremPicsum';
 import Login from './pages/Login';
 import Product from './pages/Product';
+import Camera from './pages/Camera';
 
 export default function App() {
 
@@ -32,8 +33,9 @@ export default function App() {
   }
 
   function handleScan (){
-    const product = {title: 'La démo !'};
-    setProducts(oldArray => [...oldArray, product]);
+    navigate('Camera')
+    /*const product = {title: 'La démo !'};
+    setProducts(oldArray => [...oldArray, product]);*/
   }
 
   function login(){
@@ -55,6 +57,7 @@ export default function App() {
       { page === 'LoremPicsum' && <LoremPicsum/> } 
       { page === 'Login' && <Login login={login}/> } 
       { page === 'Product' && <Product product={currentProduct}/> } 
+      { page === 'Camera' && <Camera /> } 
 
 
       <View style={styles.topMenu}>
