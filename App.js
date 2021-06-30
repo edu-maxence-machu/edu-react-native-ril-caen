@@ -7,6 +7,7 @@ import ProductsHistory from './components/ProductsHistory';
 import TestState from './pages/TestState';
 import Home from './pages/Home';
 import LoremPicsum from './pages/LoremPicsum';
+import Login from './pages/Login';
 
 export default function App() {
 
@@ -32,6 +33,10 @@ export default function App() {
     setProducts(oldArray => [...oldArray, product]);
   }
 
+  function login(){
+    navigate('Home')
+  }
+
   return (
     <View style={styles.container}>
       <Header title="Accueil"/>
@@ -39,6 +44,7 @@ export default function App() {
       { page === 'Home' && <Home products={products} handleScan={handleScan}/>}
       { page === 'Test' && <TestState/> } 
       { page === 'LoremPicsum' && <LoremPicsum/> } 
+      { page === 'Login' && <Login login={login}/> } 
 
       <View style={styles.topMenu}>
           <Button 
@@ -57,6 +63,12 @@ export default function App() {
             title="Picsum" 
             color={page === "LoremPicsum" ? "green" : 'grey'}
             onPress={() => navigate('LoremPicsum')}
+          />
+          
+          <Button 
+            title="Login" 
+            color={page === "Login" ? "green" : 'grey'}
+            onPress={() => navigate('Login')}
           />
         </View>
 
